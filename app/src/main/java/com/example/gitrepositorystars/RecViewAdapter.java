@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -38,6 +39,9 @@ public class RecViewAdapter extends RecyclerView.Adapter<RecViewAdapter.ViewHold
         GitRepo data = mData.get(position);
         holder.textView.setText(String.valueOf(data.getStargazersCount()));
         holder.starLabel.setText("Repo Star Count");
+        new DownloadImageTask((ImageView) holder.itemView.findViewById(R.id.gitRepoImg))
+                .execute(data.getGitUser().getAvatarUrl());
+        holder.repoName.setText(String.valueOf(data.getFullName()));
     }
 
     @Override
@@ -49,10 +53,12 @@ public class RecViewAdapter extends RecyclerView.Adapter<RecViewAdapter.ViewHold
 
         TextView textView;
         TextView starLabel;
+        TextView repoName;
         ViewHolder(View itemView) {
             super(itemView);
             this.textView = itemView.findViewById(R.id.git_repo_txt);
             this.starLabel = itemView.findViewById(R.id.label_star);
+            this.repoName = itemView.findViewById(R.id.repoName);
             itemView.setOnClickListener(this);
         }
         @Override

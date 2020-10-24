@@ -5,6 +5,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -34,15 +36,11 @@ public class MainActivity extends AppCompatActivity implements RecViewAdapter.It
         GitApi gitApi = ret.create(GitApi.class);
 
         Call<GitRepoWrapper> listCall = gitApi.getRepos("stars:>=100000", "stars", "desc");
-        System.out.println("kurac");
         System.out.println(listCall.request().toString());
-
-
 
         listCall.enqueue(new Callback<GitRepoWrapper>() {
             @Override
             public void onResponse(Call<GitRepoWrapper> call, Response<GitRepoWrapper> response) {
-                System.out.println("kurac req");
                 if(!response.isSuccessful()) {
                     System.err.println("Code" + response.code());
                     return;
@@ -69,6 +67,10 @@ public class MainActivity extends AppCompatActivity implements RecViewAdapter.It
 
     @Override
     public void onItemClick(View view, int position) {
-        Toast.makeText(this, "You clicked " + recViewAdapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
+        GitRepo item = recViewAdapter.getItem(position);
+        Uri uri = Uri.parse(item.getHtmlUrl());
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
+
     }
 }

@@ -266,11 +266,11 @@ public class GitRepo {
         this._private = _private;
     }
 
-    public GitUser getOwner() {
+    public GitUser getGitUser() {
         return owner;
     }
 
-    public void setOwner(GitUser owner) {
+    public void setGitUser(GitUser owner) {
         this.owner = owner;
     }
 
