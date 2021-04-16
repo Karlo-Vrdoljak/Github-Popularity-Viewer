@@ -17,12 +17,12 @@ import org.w3c.dom.Text;
 import java.util.List;
 
 public class RecViewAdapter extends RecyclerView.Adapter<RecViewAdapter.ViewHolder> {
-    private List<GitRepo> mData;
+    private List<Note> mData;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
 
-    RecViewAdapter(Context context,List<GitRepo> data) {
+    RecViewAdapter(Context context,List<Note> data) {
         this.mData = data;
         this.mInflater = LayoutInflater.from(context);
     }
@@ -36,12 +36,15 @@ public class RecViewAdapter extends RecyclerView.Adapter<RecViewAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        GitRepo data = mData.get(position);
+        Note data = mData.get(position);
+        holder.starLabel.setText(String.valueOf(data.getCreatedAt()));
+        holder.textView.setText(String.valueOf(data.getName()));
+        /*
         holder.textView.setText(String.valueOf(data.getStargazersCount()));
-        holder.starLabel.setText("Repo Star Count");
         new DownloadImageTask((ImageView) holder.itemView.findViewById(R.id.gitRepoImg))
                 .execute(data.getGitUser().getAvatarUrl());
         holder.repoName.setText(String.valueOf(data.getFullName()));
+        */
     }
 
     @Override
@@ -58,7 +61,6 @@ public class RecViewAdapter extends RecyclerView.Adapter<RecViewAdapter.ViewHold
             super(itemView);
             this.textView = itemView.findViewById(R.id.git_repo_txt);
             this.starLabel = itemView.findViewById(R.id.label_star);
-            this.repoName = itemView.findViewById(R.id.repoName);
             itemView.setOnClickListener(this);
         }
         @Override
@@ -69,7 +71,7 @@ public class RecViewAdapter extends RecyclerView.Adapter<RecViewAdapter.ViewHold
         }
     }
 
-    GitRepo getItem(int id) {
+    Note getItem(int id) {
         return mData.get(id);
     }
     void setOnclickListener(ItemClickListener itemClickListener) {

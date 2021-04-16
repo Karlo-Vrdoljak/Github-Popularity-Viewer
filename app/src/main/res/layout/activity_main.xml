@@ -8,17 +8,34 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rev_view"
-        android:layout_width="409dp"
-        android:layout_height="729dp"
+        android:layout_width="268dp"
+        android:layout_height="689dp"
         android:layout_marginStart="1dp"
-        android:layout_marginLeft="1dp"
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginRight="1dp"
         android:layout_marginBottom="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.702"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:itemCount="17" />
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/addFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="56dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="NEW NOTE"
+        android:textColor="#fff"
+        android:theme="@style/Theme.MaterialComponents.NoActionBar"
+        app:layout_anchorGravity="bottom|start"
+        app:layout_constraintBottom_toBottomOf="@+id/rev_view"
+        app:layout_constraintEnd_toEndOf="@+id/rev_view"
+        app:strokeColor="@color/colorPrimary"
+        app:strokeWidth="4dp" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
